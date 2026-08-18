@@ -10,33 +10,361 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppDemandRouteImport } from './routes/_app.demand'
+import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
+import { Route as AppOverviewRouteImport } from './routes/_app.overview'
+import { Route as AppProcurementRouteImport } from './routes/_app.procurement'
+import { Route as AppAiAlertsRouteImport } from './routes/_app.ai.alerts'
+import { Route as AppAiAssistantRouteImport } from './routes/_app.ai.assistant'
+import { Route as AppAiRecommendationsRouteImport } from './routes/_app.ai.recommendations'
+import { Route as AppAiSimulatorRouteImport } from './routes/_app.ai.simulator'
+import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
+import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
+import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
+import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
+import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
+import { Route as AppGovernanceAiActivityRouteImport } from './routes/_app.governance.ai-activity'
+import { Route as AppGovernanceAuditRouteImport } from './routes/_app.governance.audit'
+import { Route as AppGovernanceDataSourcesRouteImport } from './routes/_app.governance.data-sources'
+import { Route as AppInventoryBalanceRouteImport } from './routes/_app.inventory.balance'
+import { Route as AppInventoryExcessRouteImport } from './routes/_app.inventory.excess'
+import { Route as AppInventoryReplenishmentRouteImport } from './routes/_app.inventory.replenishment'
+import { Route as AppInventoryStockRiskRouteImport } from './routes/_app.inventory.stock-risk'
+import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
+import { Route as AppProcurementPricingRouteImport } from './routes/_app.procurement.pricing'
+import { Route as AppProcurementPurchaseOrdersRouteImport } from './routes/_app.procurement.purchase-orders'
+import { Route as AppProcurementRfqRouteImport } from './routes/_app.procurement.rfq'
+import { Route as AppProcurementSavingsRouteImport } from './routes/_app.procurement.savings'
+import { Route as AppProcurementSuppliersRouteImport } from './routes/_app.procurement.suppliers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppDemandRoute = AppDemandRouteImport.update({
+  id: '/demand',
+  path: '/demand',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryRoute = AppInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOverviewRoute = AppOverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProcurementRoute = AppProcurementRouteImport.update({
+  id: '/procurement',
+  path: '/procurement',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiAlertsRoute = AppAiAlertsRouteImport.update({
+  id: '/ai/alerts',
+  path: '/ai/alerts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiAssistantRoute = AppAiAssistantRouteImport.update({
+  id: '/ai/assistant',
+  path: '/ai/assistant',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiRecommendationsRoute = AppAiRecommendationsRouteImport.update({
+  id: '/ai/recommendations',
+  path: '/ai/recommendations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiSimulatorRoute = AppAiSimulatorRouteImport.update({
+  id: '/ai/simulator',
+  path: '/ai/simulator',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDemandAccuracyRoute = AppDemandAccuracyRouteImport.update({
+  id: '/accuracy',
+  path: '/accuracy',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandDriversRoute = AppDemandDriversRouteImport.update({
+  id: '/drivers',
+  path: '/drivers',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandForecastExplorerRoute =
+  AppDemandForecastExplorerRouteImport.update({
+    id: '/forecast-explorer',
+    path: '/forecast-explorer',
+    getParentRoute: () => AppDemandRoute,
+  } as any)
+const AppDemandSkusRoute = AppDemandSkusRouteImport.update({
+  id: '/skus',
+  path: '/skus',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandStoresRoute = AppDemandStoresRouteImport.update({
+  id: '/stores',
+  path: '/stores',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppGovernanceAiActivityRoute = AppGovernanceAiActivityRouteImport.update({
+  id: '/governance/ai-activity',
+  path: '/governance/ai-activity',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGovernanceAuditRoute = AppGovernanceAuditRouteImport.update({
+  id: '/governance/audit',
+  path: '/governance/audit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGovernanceDataSourcesRoute =
+  AppGovernanceDataSourcesRouteImport.update({
+    id: '/governance/data-sources',
+    path: '/governance/data-sources',
+    getParentRoute: () => AppRoute,
+  } as any)
+const AppInventoryBalanceRoute = AppInventoryBalanceRouteImport.update({
+  id: '/balance',
+  path: '/balance',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryExcessRoute = AppInventoryExcessRouteImport.update({
+  id: '/excess',
+  path: '/excess',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryReplenishmentRoute =
+  AppInventoryReplenishmentRouteImport.update({
+    id: '/replenishment',
+    path: '/replenishment',
+    getParentRoute: () => AppInventoryRoute,
+  } as any)
+const AppInventoryStockRiskRoute = AppInventoryStockRiskRouteImport.update({
+  id: '/stock-risk',
+  path: '/stock-risk',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
+  id: '/transfers',
+  path: '/transfers',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppProcurementPricingRoute = AppProcurementPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementPurchaseOrdersRoute =
+  AppProcurementPurchaseOrdersRouteImport.update({
+    id: '/purchase-orders',
+    path: '/purchase-orders',
+    getParentRoute: () => AppProcurementRoute,
+  } as any)
+const AppProcurementRfqRoute = AppProcurementRfqRouteImport.update({
+  id: '/rfq',
+  path: '/rfq',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementSavingsRoute = AppProcurementSavingsRouteImport.update({
+  id: '/savings',
+  path: '/savings',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementSuppliersRoute = AppProcurementSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demand': typeof AppDemandRouteWithChildren
+  '/inventory': typeof AppInventoryRouteWithChildren
+  '/overview': typeof AppOverviewRoute
+  '/procurement': typeof AppProcurementRouteWithChildren
+  '/ai/alerts': typeof AppAiAlertsRoute
+  '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/simulator': typeof AppAiSimulatorRoute
+  '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/drivers': typeof AppDemandDriversRoute
+  '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/demand/skus': typeof AppDemandSkusRoute
+  '/demand/stores': typeof AppDemandStoresRoute
+  '/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/governance/audit': typeof AppGovernanceAuditRoute
+  '/governance/data-sources': typeof AppGovernanceDataSourcesRoute
+  '/inventory/balance': typeof AppInventoryBalanceRoute
+  '/inventory/excess': typeof AppInventoryExcessRoute
+  '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
+  '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/procurement/pricing': typeof AppProcurementPricingRoute
+  '/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/procurement/rfq': typeof AppProcurementRfqRoute
+  '/procurement/savings': typeof AppProcurementSavingsRoute
+  '/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demand': typeof AppDemandRouteWithChildren
+  '/inventory': typeof AppInventoryRouteWithChildren
+  '/overview': typeof AppOverviewRoute
+  '/procurement': typeof AppProcurementRouteWithChildren
+  '/ai/alerts': typeof AppAiAlertsRoute
+  '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/simulator': typeof AppAiSimulatorRoute
+  '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/drivers': typeof AppDemandDriversRoute
+  '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/demand/skus': typeof AppDemandSkusRoute
+  '/demand/stores': typeof AppDemandStoresRoute
+  '/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/governance/audit': typeof AppGovernanceAuditRoute
+  '/governance/data-sources': typeof AppGovernanceDataSourcesRoute
+  '/inventory/balance': typeof AppInventoryBalanceRoute
+  '/inventory/excess': typeof AppInventoryExcessRoute
+  '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
+  '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/procurement/pricing': typeof AppProcurementPricingRoute
+  '/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/procurement/rfq': typeof AppProcurementRfqRoute
+  '/procurement/savings': typeof AppProcurementSavingsRoute
+  '/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/demand': typeof AppDemandRouteWithChildren
+  '/_app/inventory': typeof AppInventoryRouteWithChildren
+  '/_app/overview': typeof AppOverviewRoute
+  '/_app/procurement': typeof AppProcurementRouteWithChildren
+  '/_app/ai/alerts': typeof AppAiAlertsRoute
+  '/_app/ai/assistant': typeof AppAiAssistantRoute
+  '/_app/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/_app/ai/simulator': typeof AppAiSimulatorRoute
+  '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/_app/demand/drivers': typeof AppDemandDriversRoute
+  '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/_app/demand/skus': typeof AppDemandSkusRoute
+  '/_app/demand/stores': typeof AppDemandStoresRoute
+  '/_app/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/_app/governance/audit': typeof AppGovernanceAuditRoute
+  '/_app/governance/data-sources': typeof AppGovernanceDataSourcesRoute
+  '/_app/inventory/balance': typeof AppInventoryBalanceRoute
+  '/_app/inventory/excess': typeof AppInventoryExcessRoute
+  '/_app/inventory/replenishment': typeof AppInventoryReplenishmentRoute
+  '/_app/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/_app/procurement/pricing': typeof AppProcurementPricingRoute
+  '/_app/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/_app/procurement/rfq': typeof AppProcurementRfqRoute
+  '/_app/procurement/savings': typeof AppProcurementSavingsRoute
+  '/_app/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/demand'
+    | '/inventory'
+    | '/overview'
+    | '/procurement'
+    | '/ai/alerts'
+    | '/ai/assistant'
+    | '/ai/recommendations'
+    | '/ai/simulator'
+    | '/demand/accuracy'
+    | '/demand/drivers'
+    | '/demand/forecast-explorer'
+    | '/demand/skus'
+    | '/demand/stores'
+    | '/governance/ai-activity'
+    | '/governance/audit'
+    | '/governance/data-sources'
+    | '/inventory/balance'
+    | '/inventory/excess'
+    | '/inventory/replenishment'
+    | '/inventory/stock-risk'
+    | '/inventory/transfers'
+    | '/procurement/pricing'
+    | '/procurement/purchase-orders'
+    | '/procurement/rfq'
+    | '/procurement/savings'
+    | '/procurement/suppliers'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/demand'
+    | '/inventory'
+    | '/overview'
+    | '/procurement'
+    | '/ai/alerts'
+    | '/ai/assistant'
+    | '/ai/recommendations'
+    | '/ai/simulator'
+    | '/demand/accuracy'
+    | '/demand/drivers'
+    | '/demand/forecast-explorer'
+    | '/demand/skus'
+    | '/demand/stores'
+    | '/governance/ai-activity'
+    | '/governance/audit'
+    | '/governance/data-sources'
+    | '/inventory/balance'
+    | '/inventory/excess'
+    | '/inventory/replenishment'
+    | '/inventory/stock-risk'
+    | '/inventory/transfers'
+    | '/procurement/pricing'
+    | '/procurement/purchase-orders'
+    | '/procurement/rfq'
+    | '/procurement/savings'
+    | '/procurement/suppliers'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/demand'
+    | '/_app/inventory'
+    | '/_app/overview'
+    | '/_app/procurement'
+    | '/_app/ai/alerts'
+    | '/_app/ai/assistant'
+    | '/_app/ai/recommendations'
+    | '/_app/ai/simulator'
+    | '/_app/demand/accuracy'
+    | '/_app/demand/drivers'
+    | '/_app/demand/forecast-explorer'
+    | '/_app/demand/skus'
+    | '/_app/demand/stores'
+    | '/_app/governance/ai-activity'
+    | '/_app/governance/audit'
+    | '/_app/governance/data-sources'
+    | '/_app/inventory/balance'
+    | '/_app/inventory/excess'
+    | '/_app/inventory/replenishment'
+    | '/_app/inventory/stock-risk'
+    | '/_app/inventory/transfers'
+    | '/_app/procurement/pricing'
+    | '/_app/procurement/purchase-orders'
+    | '/_app/procurement/rfq'
+    | '/_app/procurement/savings'
+    | '/_app/procurement/suppliers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +376,291 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app/demand': {
+      id: '/_app/demand'
+      path: '/demand'
+      fullPath: '/demand'
+      preLoaderRoute: typeof AppDemandRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory': {
+      id: '/_app/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof AppInventoryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/overview': {
+      id: '/_app/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof AppOverviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/procurement': {
+      id: '/_app/procurement'
+      path: '/procurement'
+      fullPath: '/procurement'
+      preLoaderRoute: typeof AppProcurementRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/alerts': {
+      id: '/_app/ai/alerts'
+      path: '/ai/alerts'
+      fullPath: '/ai/alerts'
+      preLoaderRoute: typeof AppAiAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/assistant': {
+      id: '/_app/ai/assistant'
+      path: '/ai/assistant'
+      fullPath: '/ai/assistant'
+      preLoaderRoute: typeof AppAiAssistantRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/recommendations': {
+      id: '/_app/ai/recommendations'
+      path: '/ai/recommendations'
+      fullPath: '/ai/recommendations'
+      preLoaderRoute: typeof AppAiRecommendationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/simulator': {
+      id: '/_app/ai/simulator'
+      path: '/ai/simulator'
+      fullPath: '/ai/simulator'
+      preLoaderRoute: typeof AppAiSimulatorRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/demand/accuracy': {
+      id: '/_app/demand/accuracy'
+      path: '/accuracy'
+      fullPath: '/demand/accuracy'
+      preLoaderRoute: typeof AppDemandAccuracyRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/drivers': {
+      id: '/_app/demand/drivers'
+      path: '/drivers'
+      fullPath: '/demand/drivers'
+      preLoaderRoute: typeof AppDemandDriversRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/forecast-explorer': {
+      id: '/_app/demand/forecast-explorer'
+      path: '/forecast-explorer'
+      fullPath: '/demand/forecast-explorer'
+      preLoaderRoute: typeof AppDemandForecastExplorerRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/skus': {
+      id: '/_app/demand/skus'
+      path: '/skus'
+      fullPath: '/demand/skus'
+      preLoaderRoute: typeof AppDemandSkusRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/stores': {
+      id: '/_app/demand/stores'
+      path: '/stores'
+      fullPath: '/demand/stores'
+      preLoaderRoute: typeof AppDemandStoresRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/governance/ai-activity': {
+      id: '/_app/governance/ai-activity'
+      path: '/governance/ai-activity'
+      fullPath: '/governance/ai-activity'
+      preLoaderRoute: typeof AppGovernanceAiActivityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/governance/audit': {
+      id: '/_app/governance/audit'
+      path: '/governance/audit'
+      fullPath: '/governance/audit'
+      preLoaderRoute: typeof AppGovernanceAuditRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/governance/data-sources': {
+      id: '/_app/governance/data-sources'
+      path: '/governance/data-sources'
+      fullPath: '/governance/data-sources'
+      preLoaderRoute: typeof AppGovernanceDataSourcesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory/balance': {
+      id: '/_app/inventory/balance'
+      path: '/balance'
+      fullPath: '/inventory/balance'
+      preLoaderRoute: typeof AppInventoryBalanceRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/excess': {
+      id: '/_app/inventory/excess'
+      path: '/excess'
+      fullPath: '/inventory/excess'
+      preLoaderRoute: typeof AppInventoryExcessRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/replenishment': {
+      id: '/_app/inventory/replenishment'
+      path: '/replenishment'
+      fullPath: '/inventory/replenishment'
+      preLoaderRoute: typeof AppInventoryReplenishmentRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/stock-risk': {
+      id: '/_app/inventory/stock-risk'
+      path: '/stock-risk'
+      fullPath: '/inventory/stock-risk'
+      preLoaderRoute: typeof AppInventoryStockRiskRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/transfers': {
+      id: '/_app/inventory/transfers'
+      path: '/transfers'
+      fullPath: '/inventory/transfers'
+      preLoaderRoute: typeof AppInventoryTransfersRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/procurement/pricing': {
+      id: '/_app/procurement/pricing'
+      path: '/pricing'
+      fullPath: '/procurement/pricing'
+      preLoaderRoute: typeof AppProcurementPricingRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/purchase-orders': {
+      id: '/_app/procurement/purchase-orders'
+      path: '/purchase-orders'
+      fullPath: '/procurement/purchase-orders'
+      preLoaderRoute: typeof AppProcurementPurchaseOrdersRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/rfq': {
+      id: '/_app/procurement/rfq'
+      path: '/rfq'
+      fullPath: '/procurement/rfq'
+      preLoaderRoute: typeof AppProcurementRfqRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/savings': {
+      id: '/_app/procurement/savings'
+      path: '/savings'
+      fullPath: '/procurement/savings'
+      preLoaderRoute: typeof AppProcurementSavingsRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/suppliers': {
+      id: '/_app/procurement/suppliers'
+      path: '/suppliers'
+      fullPath: '/procurement/suppliers'
+      preLoaderRoute: typeof AppProcurementSuppliersRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
   }
 }
 
+interface AppDemandRouteChildren {
+  AppDemandAccuracyRoute: typeof AppDemandAccuracyRoute
+  AppDemandDriversRoute: typeof AppDemandDriversRoute
+  AppDemandForecastExplorerRoute: typeof AppDemandForecastExplorerRoute
+  AppDemandSkusRoute: typeof AppDemandSkusRoute
+  AppDemandStoresRoute: typeof AppDemandStoresRoute
+}
+
+const AppDemandRouteChildren: AppDemandRouteChildren = {
+  AppDemandAccuracyRoute: AppDemandAccuracyRoute,
+  AppDemandDriversRoute: AppDemandDriversRoute,
+  AppDemandForecastExplorerRoute: AppDemandForecastExplorerRoute,
+  AppDemandSkusRoute: AppDemandSkusRoute,
+  AppDemandStoresRoute: AppDemandStoresRoute,
+}
+
+const AppDemandRouteWithChildren = AppDemandRoute._addFileChildren(
+  AppDemandRouteChildren,
+)
+
+interface AppInventoryRouteChildren {
+  AppInventoryBalanceRoute: typeof AppInventoryBalanceRoute
+  AppInventoryExcessRoute: typeof AppInventoryExcessRoute
+  AppInventoryReplenishmentRoute: typeof AppInventoryReplenishmentRoute
+  AppInventoryStockRiskRoute: typeof AppInventoryStockRiskRoute
+  AppInventoryTransfersRoute: typeof AppInventoryTransfersRoute
+}
+
+const AppInventoryRouteChildren: AppInventoryRouteChildren = {
+  AppInventoryBalanceRoute: AppInventoryBalanceRoute,
+  AppInventoryExcessRoute: AppInventoryExcessRoute,
+  AppInventoryReplenishmentRoute: AppInventoryReplenishmentRoute,
+  AppInventoryStockRiskRoute: AppInventoryStockRiskRoute,
+  AppInventoryTransfersRoute: AppInventoryTransfersRoute,
+}
+
+const AppInventoryRouteWithChildren = AppInventoryRoute._addFileChildren(
+  AppInventoryRouteChildren,
+)
+
+interface AppProcurementRouteChildren {
+  AppProcurementPricingRoute: typeof AppProcurementPricingRoute
+  AppProcurementPurchaseOrdersRoute: typeof AppProcurementPurchaseOrdersRoute
+  AppProcurementRfqRoute: typeof AppProcurementRfqRoute
+  AppProcurementSavingsRoute: typeof AppProcurementSavingsRoute
+  AppProcurementSuppliersRoute: typeof AppProcurementSuppliersRoute
+}
+
+const AppProcurementRouteChildren: AppProcurementRouteChildren = {
+  AppProcurementPricingRoute: AppProcurementPricingRoute,
+  AppProcurementPurchaseOrdersRoute: AppProcurementPurchaseOrdersRoute,
+  AppProcurementRfqRoute: AppProcurementRfqRoute,
+  AppProcurementSavingsRoute: AppProcurementSavingsRoute,
+  AppProcurementSuppliersRoute: AppProcurementSuppliersRoute,
+}
+
+const AppProcurementRouteWithChildren = AppProcurementRoute._addFileChildren(
+  AppProcurementRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppDemandRoute: typeof AppDemandRouteWithChildren
+  AppInventoryRoute: typeof AppInventoryRouteWithChildren
+  AppOverviewRoute: typeof AppOverviewRoute
+  AppProcurementRoute: typeof AppProcurementRouteWithChildren
+  AppAiAlertsRoute: typeof AppAiAlertsRoute
+  AppAiAssistantRoute: typeof AppAiAssistantRoute
+  AppAiRecommendationsRoute: typeof AppAiRecommendationsRoute
+  AppAiSimulatorRoute: typeof AppAiSimulatorRoute
+  AppGovernanceAiActivityRoute: typeof AppGovernanceAiActivityRoute
+  AppGovernanceAuditRoute: typeof AppGovernanceAuditRoute
+  AppGovernanceDataSourcesRoute: typeof AppGovernanceDataSourcesRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppDemandRoute: AppDemandRouteWithChildren,
+  AppInventoryRoute: AppInventoryRouteWithChildren,
+  AppOverviewRoute: AppOverviewRoute,
+  AppProcurementRoute: AppProcurementRouteWithChildren,
+  AppAiAlertsRoute: AppAiAlertsRoute,
+  AppAiAssistantRoute: AppAiAssistantRoute,
+  AppAiRecommendationsRoute: AppAiRecommendationsRoute,
+  AppAiSimulatorRoute: AppAiSimulatorRoute,
+  AppGovernanceAiActivityRoute: AppGovernanceAiActivityRoute,
+  AppGovernanceAuditRoute: AppGovernanceAuditRoute,
+  AppGovernanceDataSourcesRoute: AppGovernanceDataSourcesRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
