@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppDemandRouteImport } from './routes/_app.demand'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
 
 const IndexRoute = IndexRouteImport.update({
@@ -22,6 +23,11 @@ const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppDemandRoute = AppDemandRouteImport.update({
+  id: '/demand',
+  path: '/demand',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppOverviewRoute = AppOverviewRouteImport.update({
   id: '/overview',
   path: '/overview',
@@ -30,24 +36,27 @@ const AppOverviewRoute = AppOverviewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/demand': typeof AppDemandRoute
   '/overview': typeof AppOverviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/demand': typeof AppDemandRoute
   '/overview': typeof AppOverviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/demand': typeof AppDemandRoute
   '/_app/overview': typeof AppOverviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/overview'
+  fullPaths: '/' | '/demand' | '/overview'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/overview'
-  id: '__root__' | '/' | '/_app' | '/_app/overview'
+  to: '/' | '/demand' | '/overview'
+  id: '__root__' | '/' | '/_app' | '/_app/demand' | '/_app/overview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -71,6 +80,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/demand': {
+      id: '/_app/demand'
+      path: '/demand'
+      fullPath: '/demand'
+      preLoaderRoute: typeof AppDemandRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/overview': {
       id: '/_app/overview'
       path: '/overview'
@@ -82,10 +98,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppDemandRoute: typeof AppDemandRoute
   AppOverviewRoute: typeof AppOverviewRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppDemandRoute: AppDemandRoute,
   AppOverviewRoute: AppOverviewRoute,
 }
 
