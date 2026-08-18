@@ -13,6 +13,9 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDemandRouteImport } from './routes/_app.demand'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
+import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
+import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
+import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,30 +36,75 @@ const AppOverviewRoute = AppOverviewRouteImport.update({
   path: '/overview',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDemandForecastExplorerRoute =
+  AppDemandForecastExplorerRouteImport.update({
+    id: '/forecast-explorer',
+    path: '/forecast-explorer',
+    getParentRoute: () => AppDemandRoute,
+  } as any)
+const AppDemandSkusRoute = AppDemandSkusRouteImport.update({
+  id: '/skus',
+  path: '/skus',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandStoresRoute = AppDemandStoresRouteImport.update({
+  id: '/stores',
+  path: '/stores',
+  getParentRoute: () => AppDemandRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demand': typeof AppDemandRoute
+  '/demand': typeof AppDemandRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/demand/skus': typeof AppDemandSkusRoute
+  '/demand/stores': typeof AppDemandStoresRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demand': typeof AppDemandRoute
+  '/demand': typeof AppDemandRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/demand/skus': typeof AppDemandSkusRoute
+  '/demand/stores': typeof AppDemandStoresRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
-  '/_app/demand': typeof AppDemandRoute
+  '/_app/demand': typeof AppDemandRouteWithChildren
   '/_app/overview': typeof AppOverviewRoute
+  '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
+  '/_app/demand/skus': typeof AppDemandSkusRoute
+  '/_app/demand/stores': typeof AppDemandStoresRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demand' | '/overview'
+  fullPaths:
+    | '/'
+    | '/demand'
+    | '/overview'
+    | '/demand/forecast-explorer'
+    | '/demand/skus'
+    | '/demand/stores'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demand' | '/overview'
-  id: '__root__' | '/' | '/_app' | '/_app/demand' | '/_app/overview'
+  to:
+    | '/'
+    | '/demand'
+    | '/overview'
+    | '/demand/forecast-explorer'
+    | '/demand/skus'
+    | '/demand/stores'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/demand'
+    | '/_app/overview'
+    | '/_app/demand/forecast-explorer'
+    | '/_app/demand/skus'
+    | '/_app/demand/stores'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,16 +142,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOverviewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/demand/forecast-explorer': {
+      id: '/_app/demand/forecast-explorer'
+      path: '/forecast-explorer'
+      fullPath: '/demand/forecast-explorer'
+      preLoaderRoute: typeof AppDemandForecastExplorerRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/skus': {
+      id: '/_app/demand/skus'
+      path: '/skus'
+      fullPath: '/demand/skus'
+      preLoaderRoute: typeof AppDemandSkusRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/stores': {
+      id: '/_app/demand/stores'
+      path: '/stores'
+      fullPath: '/demand/stores'
+      preLoaderRoute: typeof AppDemandStoresRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
   }
 }
 
+interface AppDemandRouteChildren {
+  AppDemandForecastExplorerRoute: typeof AppDemandForecastExplorerRoute
+  AppDemandSkusRoute: typeof AppDemandSkusRoute
+  AppDemandStoresRoute: typeof AppDemandStoresRoute
+}
+
+const AppDemandRouteChildren: AppDemandRouteChildren = {
+  AppDemandForecastExplorerRoute: AppDemandForecastExplorerRoute,
+  AppDemandSkusRoute: AppDemandSkusRoute,
+  AppDemandStoresRoute: AppDemandStoresRoute,
+}
+
+const AppDemandRouteWithChildren = AppDemandRoute._addFileChildren(
+  AppDemandRouteChildren,
+)
+
 interface AppRouteChildren {
-  AppDemandRoute: typeof AppDemandRoute
+  AppDemandRoute: typeof AppDemandRouteWithChildren
   AppOverviewRoute: typeof AppOverviewRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppDemandRoute: AppDemandRoute,
+  AppDemandRoute: AppDemandRouteWithChildren,
   AppOverviewRoute: AppOverviewRoute,
 }
 
