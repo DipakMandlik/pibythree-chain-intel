@@ -15,11 +15,18 @@ import { Route as AppDemandRouteImport } from './routes/_app.demand'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
 import { Route as AppProcurementRouteImport } from './routes/_app.procurement'
+import { Route as AppAiAlertsRouteImport } from './routes/_app.ai.alerts'
+import { Route as AppAiAssistantRouteImport } from './routes/_app.ai.assistant'
+import { Route as AppAiRecommendationsRouteImport } from './routes/_app.ai.recommendations'
+import { Route as AppAiSimulatorRouteImport } from './routes/_app.ai.simulator'
 import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
 import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
 import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
 import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
+import { Route as AppGovernanceAiActivityRouteImport } from './routes/_app.governance.ai-activity'
+import { Route as AppGovernanceAuditRouteImport } from './routes/_app.governance.audit'
+import { Route as AppGovernanceDataSourcesRouteImport } from './routes/_app.governance.data-sources'
 import { Route as AppInventoryBalanceRouteImport } from './routes/_app.inventory.balance'
 import { Route as AppInventoryExcessRouteImport } from './routes/_app.inventory.excess'
 import { Route as AppInventoryReplenishmentRouteImport } from './routes/_app.inventory.replenishment'
@@ -60,6 +67,26 @@ const AppProcurementRoute = AppProcurementRouteImport.update({
   path: '/procurement',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAiAlertsRoute = AppAiAlertsRouteImport.update({
+  id: '/ai/alerts',
+  path: '/ai/alerts',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiAssistantRoute = AppAiAssistantRouteImport.update({
+  id: '/ai/assistant',
+  path: '/ai/assistant',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiRecommendationsRoute = AppAiRecommendationsRouteImport.update({
+  id: '/ai/recommendations',
+  path: '/ai/recommendations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiSimulatorRoute = AppAiSimulatorRouteImport.update({
+  id: '/ai/simulator',
+  path: '/ai/simulator',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDemandAccuracyRoute = AppDemandAccuracyRouteImport.update({
   id: '/accuracy',
   path: '/accuracy',
@@ -86,6 +113,22 @@ const AppDemandStoresRoute = AppDemandStoresRouteImport.update({
   path: '/stores',
   getParentRoute: () => AppDemandRoute,
 } as any)
+const AppGovernanceAiActivityRoute = AppGovernanceAiActivityRouteImport.update({
+  id: '/governance/ai-activity',
+  path: '/governance/ai-activity',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGovernanceAuditRoute = AppGovernanceAuditRouteImport.update({
+  id: '/governance/audit',
+  path: '/governance/audit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGovernanceDataSourcesRoute =
+  AppGovernanceDataSourcesRouteImport.update({
+    id: '/governance/data-sources',
+    path: '/governance/data-sources',
+    getParentRoute: () => AppRoute,
+  } as any)
 const AppInventoryBalanceRoute = AppInventoryBalanceRouteImport.update({
   id: '/balance',
   path: '/balance',
@@ -145,11 +188,18 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
   '/procurement': typeof AppProcurementRouteWithChildren
+  '/ai/alerts': typeof AppAiAlertsRoute
+  '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/simulator': typeof AppAiSimulatorRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/governance/audit': typeof AppGovernanceAuditRoute
+  '/governance/data-sources': typeof AppGovernanceDataSourcesRoute
   '/inventory/balance': typeof AppInventoryBalanceRoute
   '/inventory/excess': typeof AppInventoryExcessRoute
   '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
@@ -167,11 +217,18 @@ export interface FileRoutesByTo {
   '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
   '/procurement': typeof AppProcurementRouteWithChildren
+  '/ai/alerts': typeof AppAiAlertsRoute
+  '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/simulator': typeof AppAiSimulatorRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/governance/audit': typeof AppGovernanceAuditRoute
+  '/governance/data-sources': typeof AppGovernanceDataSourcesRoute
   '/inventory/balance': typeof AppInventoryBalanceRoute
   '/inventory/excess': typeof AppInventoryExcessRoute
   '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
@@ -191,11 +248,18 @@ export interface FileRoutesById {
   '/_app/inventory': typeof AppInventoryRouteWithChildren
   '/_app/overview': typeof AppOverviewRoute
   '/_app/procurement': typeof AppProcurementRouteWithChildren
+  '/_app/ai/alerts': typeof AppAiAlertsRoute
+  '/_app/ai/assistant': typeof AppAiAssistantRoute
+  '/_app/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/_app/ai/simulator': typeof AppAiSimulatorRoute
   '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
   '/_app/demand/drivers': typeof AppDemandDriversRoute
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/_app/demand/skus': typeof AppDemandSkusRoute
   '/_app/demand/stores': typeof AppDemandStoresRoute
+  '/_app/governance/ai-activity': typeof AppGovernanceAiActivityRoute
+  '/_app/governance/audit': typeof AppGovernanceAuditRoute
+  '/_app/governance/data-sources': typeof AppGovernanceDataSourcesRoute
   '/_app/inventory/balance': typeof AppInventoryBalanceRoute
   '/_app/inventory/excess': typeof AppInventoryExcessRoute
   '/_app/inventory/replenishment': typeof AppInventoryReplenishmentRoute
@@ -215,11 +279,18 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/overview'
     | '/procurement'
+    | '/ai/alerts'
+    | '/ai/assistant'
+    | '/ai/recommendations'
+    | '/ai/simulator'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/governance/ai-activity'
+    | '/governance/audit'
+    | '/governance/data-sources'
     | '/inventory/balance'
     | '/inventory/excess'
     | '/inventory/replenishment'
@@ -237,11 +308,18 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/overview'
     | '/procurement'
+    | '/ai/alerts'
+    | '/ai/assistant'
+    | '/ai/recommendations'
+    | '/ai/simulator'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/governance/ai-activity'
+    | '/governance/audit'
+    | '/governance/data-sources'
     | '/inventory/balance'
     | '/inventory/excess'
     | '/inventory/replenishment'
@@ -260,11 +338,18 @@ export interface FileRouteTypes {
     | '/_app/inventory'
     | '/_app/overview'
     | '/_app/procurement'
+    | '/_app/ai/alerts'
+    | '/_app/ai/assistant'
+    | '/_app/ai/recommendations'
+    | '/_app/ai/simulator'
     | '/_app/demand/accuracy'
     | '/_app/demand/drivers'
     | '/_app/demand/forecast-explorer'
     | '/_app/demand/skus'
     | '/_app/demand/stores'
+    | '/_app/governance/ai-activity'
+    | '/_app/governance/audit'
+    | '/_app/governance/data-sources'
     | '/_app/inventory/balance'
     | '/_app/inventory/excess'
     | '/_app/inventory/replenishment'
@@ -326,6 +411,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProcurementRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/ai/alerts': {
+      id: '/_app/ai/alerts'
+      path: '/ai/alerts'
+      fullPath: '/ai/alerts'
+      preLoaderRoute: typeof AppAiAlertsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/assistant': {
+      id: '/_app/ai/assistant'
+      path: '/ai/assistant'
+      fullPath: '/ai/assistant'
+      preLoaderRoute: typeof AppAiAssistantRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/recommendations': {
+      id: '/_app/ai/recommendations'
+      path: '/ai/recommendations'
+      fullPath: '/ai/recommendations'
+      preLoaderRoute: typeof AppAiRecommendationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/simulator': {
+      id: '/_app/ai/simulator'
+      path: '/ai/simulator'
+      fullPath: '/ai/simulator'
+      preLoaderRoute: typeof AppAiSimulatorRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/demand/accuracy': {
       id: '/_app/demand/accuracy'
       path: '/accuracy'
@@ -360,6 +473,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/demand/stores'
       preLoaderRoute: typeof AppDemandStoresRouteImport
       parentRoute: typeof AppDemandRoute
+    }
+    '/_app/governance/ai-activity': {
+      id: '/_app/governance/ai-activity'
+      path: '/governance/ai-activity'
+      fullPath: '/governance/ai-activity'
+      preLoaderRoute: typeof AppGovernanceAiActivityRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/governance/audit': {
+      id: '/_app/governance/audit'
+      path: '/governance/audit'
+      fullPath: '/governance/audit'
+      preLoaderRoute: typeof AppGovernanceAuditRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/governance/data-sources': {
+      id: '/_app/governance/data-sources'
+      path: '/governance/data-sources'
+      fullPath: '/governance/data-sources'
+      preLoaderRoute: typeof AppGovernanceDataSourcesRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/inventory/balance': {
       id: '/_app/inventory/balance'
@@ -499,6 +633,13 @@ interface AppRouteChildren {
   AppInventoryRoute: typeof AppInventoryRouteWithChildren
   AppOverviewRoute: typeof AppOverviewRoute
   AppProcurementRoute: typeof AppProcurementRouteWithChildren
+  AppAiAlertsRoute: typeof AppAiAlertsRoute
+  AppAiAssistantRoute: typeof AppAiAssistantRoute
+  AppAiRecommendationsRoute: typeof AppAiRecommendationsRoute
+  AppAiSimulatorRoute: typeof AppAiSimulatorRoute
+  AppGovernanceAiActivityRoute: typeof AppGovernanceAiActivityRoute
+  AppGovernanceAuditRoute: typeof AppGovernanceAuditRoute
+  AppGovernanceDataSourcesRoute: typeof AppGovernanceDataSourcesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -506,6 +647,13 @@ const AppRouteChildren: AppRouteChildren = {
   AppInventoryRoute: AppInventoryRouteWithChildren,
   AppOverviewRoute: AppOverviewRoute,
   AppProcurementRoute: AppProcurementRouteWithChildren,
+  AppAiAlertsRoute: AppAiAlertsRoute,
+  AppAiAssistantRoute: AppAiAssistantRoute,
+  AppAiRecommendationsRoute: AppAiRecommendationsRoute,
+  AppAiSimulatorRoute: AppAiSimulatorRoute,
+  AppGovernanceAiActivityRoute: AppGovernanceAiActivityRoute,
+  AppGovernanceAuditRoute: AppGovernanceAuditRoute,
+  AppGovernanceDataSourcesRoute: AppGovernanceDataSourcesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
