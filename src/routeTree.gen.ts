@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDemandRouteImport } from './routes/_app.demand'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
+import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
+import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
 import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
 import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
@@ -36,6 +38,16 @@ const AppOverviewRoute = AppOverviewRouteImport.update({
   path: '/overview',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDemandAccuracyRoute = AppDemandAccuracyRouteImport.update({
+  id: '/accuracy',
+  path: '/accuracy',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandDriversRoute = AppDemandDriversRouteImport.update({
+  id: '/drivers',
+  path: '/drivers',
+  getParentRoute: () => AppDemandRoute,
+} as any)
 const AppDemandForecastExplorerRoute =
   AppDemandForecastExplorerRouteImport.update({
     id: '/forecast-explorer',
@@ -57,6 +69,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
@@ -65,6 +79,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
@@ -75,6 +91,8 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/demand': typeof AppDemandRouteWithChildren
   '/_app/overview': typeof AppOverviewRoute
+  '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/_app/demand/drivers': typeof AppDemandDriversRoute
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/_app/demand/skus': typeof AppDemandSkusRoute
   '/_app/demand/stores': typeof AppDemandStoresRoute
@@ -85,6 +103,8 @@ export interface FileRouteTypes {
     | '/'
     | '/demand'
     | '/overview'
+    | '/demand/accuracy'
+    | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
@@ -93,6 +113,8 @@ export interface FileRouteTypes {
     | '/'
     | '/demand'
     | '/overview'
+    | '/demand/accuracy'
+    | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
@@ -102,6 +124,8 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_app/demand'
     | '/_app/overview'
+    | '/_app/demand/accuracy'
+    | '/_app/demand/drivers'
     | '/_app/demand/forecast-explorer'
     | '/_app/demand/skus'
     | '/_app/demand/stores'
@@ -142,6 +166,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOverviewRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/demand/accuracy': {
+      id: '/_app/demand/accuracy'
+      path: '/accuracy'
+      fullPath: '/demand/accuracy'
+      preLoaderRoute: typeof AppDemandAccuracyRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/drivers': {
+      id: '/_app/demand/drivers'
+      path: '/drivers'
+      fullPath: '/demand/drivers'
+      preLoaderRoute: typeof AppDemandDriversRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
     '/_app/demand/forecast-explorer': {
       id: '/_app/demand/forecast-explorer'
       path: '/forecast-explorer'
@@ -167,12 +205,16 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppDemandRouteChildren {
+  AppDemandAccuracyRoute: typeof AppDemandAccuracyRoute
+  AppDemandDriversRoute: typeof AppDemandDriversRoute
   AppDemandForecastExplorerRoute: typeof AppDemandForecastExplorerRoute
   AppDemandSkusRoute: typeof AppDemandSkusRoute
   AppDemandStoresRoute: typeof AppDemandStoresRoute
 }
 
 const AppDemandRouteChildren: AppDemandRouteChildren = {
+  AppDemandAccuracyRoute: AppDemandAccuracyRoute,
+  AppDemandDriversRoute: AppDemandDriversRoute,
   AppDemandForecastExplorerRoute: AppDemandForecastExplorerRoute,
   AppDemandSkusRoute: AppDemandSkusRoute,
   AppDemandStoresRoute: AppDemandStoresRoute,
