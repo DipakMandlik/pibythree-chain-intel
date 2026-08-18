@@ -12,16 +12,16 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sign in — Pibythree Supply & Demand Intelligence" },
+      { title: "Sign in — Pibythree Predictive Demand Intelligence" },
       {
         name: "description",
         content:
-          "Secure sign-in to the Pibythree Supply & Demand Intelligence demonstration environment for retail supply-chain decision intelligence.",
+          "Secure sign-in to the Pibythree Predictive Demand Intelligence demonstration environment for DMART.",
       },
-      { property: "og:title", content: "Sign in — Pibythree Supply & Demand Intelligence" },
+      { property: "og:title", content: "Sign in — Pibythree Predictive Demand Intelligence" },
       {
         property: "og:description",
-        content: "Intelligent planning for the modern retail supply chain.",
+        content: "Forecast demand with intelligence. Plan with confidence.",
       },
     ],
   }),
@@ -52,18 +52,20 @@ function LoginPage() {
           <Logo className="h-9" />
         </div>
         <div className="max-w-lg text-primary-foreground">
-          <p className="label-eyebrow text-primary-foreground/70">Pibythree Enterprise AI Platform</p>
+          <p className="label-eyebrow text-primary-foreground/70">
+            Pibythree Enterprise AI Platform
+          </p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-primary-foreground">
-            Supply &amp; Demand Intelligence
+            Predictive Demand Intelligence
           </h1>
           <p className="mt-3 text-base text-primary-foreground/80">
-            Predict demand. Optimize inventory. Strengthen procurement.
+            Forecast demand with intelligence. Plan with confidence.
           </p>
           <div className="mt-8 space-y-3 text-sm text-primary-foreground/75">
             {[
-              "Granular demand forecasting across regions, stores and SKUs",
-              "Autonomous stock-risk detection with transfer and replenishment guidance",
-              "AI-augmented supplier, pricing and RFQ decisions",
+              "Granular demand forecasting across regions, stores, categories and SKUs",
+              "Explainable AI forecasts with signal-level evidence and confidence",
+              "Anomaly detection and scenario analysis for demand planners",
             ].map((t) => (
               <p key={t} className="flex gap-2.5">
                 <ShieldCheck className="mt-0.5 size-4 shrink-0 text-accent-blue" />
@@ -73,7 +75,8 @@ function LoginPage() {
           </div>
         </div>
         <p className="text-xs text-primary-foreground/60">
-          Retail Intelligence — Demo Environment. Illustrative data only; not connected to production retail systems.
+          DMART Demonstration Environment. Illustrative data only; not connected to production
+          retail systems.
         </p>
       </section>
 
@@ -84,7 +87,7 @@ function LoginPage() {
           </div>
           <h2 className="mt-6 text-2xl font-semibold tracking-tight lg:mt-0">Sign in</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            Intelligent planning for the modern retail supply chain.
+            Forecast demand with intelligence. Plan with confidence.
           </p>
 
           <form
@@ -100,7 +103,13 @@ function LoginPage() {
           >
             <div className="space-y-1.5">
               <Label htmlFor="email">Corporate email</Label>
-              <Input id="email" type="email" readOnly value={persona.email} className="bg-surface" />
+              <Input
+                id="email"
+                type="email"
+                readOnly
+                value={persona.email}
+                className="bg-surface"
+              />
             </div>
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
@@ -108,7 +117,9 @@ function LoginPage() {
                 <button
                   type="button"
                   className="text-xs font-medium text-primary hover:underline"
-                  onClick={() => setError("Password recovery is disabled in the demonstration environment.")}
+                  onClick={() =>
+                    setError("Password recovery is disabled in the demonstration environment.")
+                  }
                 >
                   Forgot password?
                 </button>
@@ -123,13 +134,16 @@ function LoginPage() {
             </div>
             {error && <p className="text-sm text-critical">{error}</p>}
             <Button type="submit" className="w-full" disabled={pending}>
-              {pending ? <Loader2 className="size-4 animate-spin" /> : <Lock className="size-4" />} Sign in
+              {pending ? <Loader2 className="size-4 animate-spin" /> : <Lock className="size-4" />}{" "}
+              Sign in
             </Button>
             <Button
               type="button"
               variant="outline"
               className="w-full"
-              onClick={() => setError("Enterprise SSO is not enabled in the demonstration environment.")}
+              onClick={() =>
+                setError("Enterprise SSO is not enabled in the demonstration environment.")
+              }
             >
               <Building2 className="size-4" /> Continue with Enterprise SSO
             </Button>
@@ -169,7 +183,7 @@ function LoginPage() {
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
-            Pibythree Supply &amp; Demand Intelligence · Demonstration build for a DMART client showcase
+            Pibythree Predictive Demand Intelligence · DMART Demonstration Environment
           </p>
         </div>
       </section>

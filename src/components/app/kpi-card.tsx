@@ -13,9 +13,22 @@ export interface KpiProps {
   onClick?: () => void;
 }
 
-export function KpiCard({ label, value, change, direction, changeTone = "neutral", caption, spark, onClick }: KpiProps) {
+export function KpiCard({
+  label,
+  value,
+  change,
+  direction,
+  changeTone = "neutral",
+  caption,
+  spark,
+  onClick,
+}: KpiProps) {
   const toneClass =
-    changeTone === "positive" ? "text-positive" : changeTone === "negative" ? "text-critical" : "text-muted-foreground";
+    changeTone === "positive"
+      ? "text-positive"
+      : changeTone === "negative"
+        ? "text-critical"
+        : "text-muted-foreground";
   const Arrow = direction === "down" ? ArrowDownRight : ArrowUpRight;
   return (
     <div
@@ -66,6 +79,16 @@ export function KpiCard({ label, value, change, direction, changeTone = "neutral
   );
 }
 
-export function KpiGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">{children}</div>;
+export function KpiGrid({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn("grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6", className)}>
+      {children}
+    </div>
+  );
 }

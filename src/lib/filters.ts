@@ -1,17 +1,29 @@
 import { categories, regions, skus, stores } from "@/data/demo";
 import type { FilterState } from "@/components/app/filter-bar";
 
-export const regionOptions = [{ value: "all", label: "All regions" }, ...regions.map((r) => ({ value: r, label: r }))];
-export const categoryOptions = [{ value: "all", label: "All categories" }, ...categories.map((c) => ({ value: c, label: c }))];
+export const regionOptions = [
+  { value: "all", label: "All regions" },
+  ...regions.map((r) => ({ value: r, label: r })),
+];
+export const categoryOptions = [
+  { value: "all", label: "All categories" },
+  ...categories.map((c) => ({ value: c, label: c })),
+];
 
 export function storeOptionsFor(region: string) {
   const list = region === "all" ? stores : stores.filter((s) => s.region === region);
-  return [{ value: "all", label: "All stores" }, ...list.map((s) => ({ value: s.id, label: `${s.name} ${s.code}` }))];
+  return [
+    { value: "all", label: "All stores" },
+    ...list.map((s) => ({ value: s.id, label: `${s.name} ${s.code}` })),
+  ];
 }
 
 export function skuOptionsFor(category: string) {
   const list = category === "all" ? skus : skus.filter((s) => s.category === category);
-  return [{ value: "all", label: "All SKUs" }, ...list.map((s) => ({ value: s.id, label: s.name }))];
+  return [
+    { value: "all", label: "All SKUs" },
+    ...list.map((s) => ({ value: s.id, label: s.name })),
+  ];
 }
 
 export function matches(f: FilterState, skuId: string, storeId: string) {

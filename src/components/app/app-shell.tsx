@@ -1,21 +1,47 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
-  Bell, ChevronsLeft, ChevronsRight, LogOut, Menu, Search, Settings, ShieldCheck, User,
+  Bell,
+  ChevronsLeft,
+  ChevronsRight,
+  LogOut,
+  Menu,
+  Search,
+  Settings,
+  ShieldCheck,
+  User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
-  CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import { ProductLockup, Logo } from "@/components/app/brand";
 import { SeverityBadge } from "@/components/app/badges";
 import { navGroups, pageTitles } from "@/lib/nav";
 import { sessionStore, useSession } from "@/lib/session";
-import { alerts, canAccess, recommendations, skus, stores, suppliers } from "@/data/demo";
+import {
+  canAccess,
+  demandAnomalies,
+  demandNotifications,
+  skuById,
+  skus,
+  storeById,
+  stores,
+} from "@/data/demo";
 import { cn } from "@/lib/utils";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -64,7 +90,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  const title = pageTitles[pathname] ?? "Supply & Demand Intelligence";
+  const title = pageTitles[pathname] ?? "Predictive Demand Intelligence";
 
   const sidebar = (
     <nav className={cn("flex h-full flex-col bg-sidebar", collapsed ? "w-[4.5rem]" : "w-64")}>
@@ -90,7 +116,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                           : "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
                       )}
                     >
-                      <item.icon className={cn("size-4 shrink-0", active ? "text-primary" : "text-muted-foreground")} />
+                      <item.icon
+                        className={cn(
+                          "size-4 shrink-0",
+                          active ? "text-primary" : "text-muted-foreground",
+                        )}
+                      />
                       {!collapsed && <span className="truncate">{item.label}</span>}
                     </Link>
                   </li>
@@ -138,7 +169,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           className="mt-2 w-full justify-center"
           onClick={() => setCollapsed((v) => !v)}
         >
-          {collapsed ? <ChevronsRight className="size-4" /> : <><ChevronsLeft className="size-4" /> Collapse</>}
+          {collapsed ? (
+            <ChevronsRight className="size-4" />
+          ) : (
+            <>
+              <ChevronsLeft className="size-4" /> Collapse
+            </>
+          )}
         </Button>
       </div>
     </nav>
@@ -146,17 +183,26 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen w-full bg-surface">
-      <aside className="sticky top-0 hidden h-screen shrink-0 border-r border-sidebar-border lg:block">{sidebar}</aside>
+      <aside className="sticky top-0 hidden h-screen shrink-0 border-r border-sidebar-border lg:block">
+        {sidebar}
+      </aside>
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-navy/30" onClick={() => setMobileOpen(false)} />
-          <div className="absolute left-0 top-0 h-full border-r border-sidebar-border shadow-panel">{sidebar}</div>
+          <div className="absolute left-0 top-0 h-full border-r border-sidebar-border shadow-panel">
+            {sidebar}
+          </div>
         </div>
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b border-border bg-card/95 px-4 backdrop-blur">
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(true)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMobileOpen(true)}
+          >
             <Menu className="size-4" />
           </Button>
           <h2 className="truncate text-sm font-semibold text-navy">{title}</h2>
@@ -165,16 +211,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             className="mx-auto hidden w-full max-w-md items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-primary/40 md:flex"
           >
             <Search className="size-3.5" />
-            Search SKUs, stores, suppliers, recommendations…
-            <kbd className="ml-auto rounded border border-border bg-card px-1.5 text-[0.6875rem]">⌘K</kbd>
+            Search SKUs, stores, categories, forecasts…
+            <kbd className="ml-auto rounded border border-border bg-card px-1.5 text-[0.6875rem]">
+              ⌘K
+            </kbd>
           </button>
 
           <div className="ml-auto flex items-center gap-2 md:ml-0">
             <span className="hidden items-center gap-1.5 rounded-md border border-border bg-surface px-2 py-1 text-xs text-muted-foreground xl:flex">
               <span className="size-1.5 rounded-full bg-positive" />
-              AI Engine Operational
+              AI Forecast Engine ● Operational
             </span>
-            <span className="hidden text-xs text-muted-foreground 2xl:inline">Data refreshed 09:42 AM</span>
+            <span className="hidden text-xs text-muted-foreground 2xl:inline">
+              Data refreshed 09:42 AM
+            </span>
 
             <Popover>
               <PopoverTrigger asChild>
@@ -184,11 +234,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </Button>
               </PopoverTrigger>
               <PopoverContent align="end" className="w-96 p-0">
-                <div className="border-b border-border px-3 py-2 text-sm font-semibold text-navy">Notifications</div>
+                <div className="border-b border-border px-3 py-2 text-sm font-semibold text-navy">
+                  Notifications
+                </div>
                 <ul className="max-h-80 overflow-y-auto">
-                  {alerts.map((a) => (
+                  {demandNotifications.map((a) => (
                     <li key={a.id}>
-                      <Link to={a.link} className="block border-b border-border px-3 py-2.5 hover:bg-surface">
+                      <Link
+                        to={a.link}
+                        className="block border-b border-border px-3 py-2.5 hover:bg-surface"
+                      >
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-sm font-medium text-navy">{a.title}</span>
                           <SeverityBadge severity={a.severity} />
@@ -200,7 +255,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </ul>
                 <div className="p-2">
                   <Button asChild variant="outline" size="sm" className="w-full">
-                    <Link to="/ai/alerts">View all alerts</Link>
+                    <Link to="/ai/insights">View all AI demand insights</Link>
                   </Button>
                 </div>
               </PopoverContent>
@@ -213,8 +268,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     {session.initials}
                   </span>
                   <span className="hidden text-left sm:block">
-                    <span className="block text-sm font-medium leading-tight text-navy">{session.name}</span>
-                    <span className="block text-xs leading-tight text-muted-foreground">{session.roleLabel}</span>
+                    <span className="block text-sm font-medium leading-tight text-navy">
+                      {session.name}
+                    </span>
+                    <span className="block text-xs leading-tight text-muted-foreground">
+                      {session.roleLabel}
+                    </span>
                   </span>
                 </button>
               </DropdownMenuTrigger>
@@ -225,13 +284,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link to="/governance/ai-activity"><User className="size-4" /> Profile &amp; preferences</Link>
+                  <Link to="/governance/ai-activity">
+                    <User className="size-4" /> Profile &amp; preferences
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/governance/ai-activity"><ShieldCheck className="size-4" /> AI activity</Link>
+                  <Link to="/governance/ai-activity">
+                    <ShieldCheck className="size-4" /> AI activity
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/governance/audit"><ShieldCheck className="size-4" /> Audit trail</Link>
+                  <Link to="/governance/audit">
+                    <ShieldCheck className="size-4" /> Audit trail
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
@@ -247,48 +312,70 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-[112rem] flex-1 space-y-5 p-4 lg:p-6">{children}</main>
+        <main className="mx-auto w-full max-w-[112rem] flex-1 space-y-5 p-4 lg:p-6">
+          {children}
+        </main>
 
         <footer className="border-t border-border bg-card px-6 py-3">
           <div className="mx-auto flex max-w-[112rem] flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
             <span className="flex items-center gap-2">
               <Logo className="h-5" />
-              <span>Supply &amp; Demand Intelligence — AI-powered retail decision intelligence</span>
+              <span>
+                Predictive Demand Intelligence — forecast demand with intelligence, plan with
+                confidence
+              </span>
             </span>
-            <span>Retail Intelligence — Demo Environment</span>
+            <span>DMART Demonstration Environment</span>
           </div>
         </footer>
       </div>
 
       <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <CommandInput placeholder="Search SKUs, stores, suppliers, recommendations…" />
+        <CommandInput placeholder="Search SKUs, stores, categories, forecasts, anomalies…" />
         <CommandList>
           <CommandEmpty>No matching records in the demonstration dataset.</CommandEmpty>
           <CommandGroup heading="SKUs">
             {skus.map((s) => (
-              <CommandItem key={s.id} value={`${s.name} ${s.code}`} onSelect={() => { setSearchOpen(false); navigate({ to: "/demand/skus" }); }}>
+              <CommandItem
+                key={s.id}
+                value={`${s.name} ${s.code}`}
+                onSelect={() => {
+                  setSearchOpen(false);
+                  navigate({ to: "/demand/skus" });
+                }}
+              >
                 {s.name} <span className="ml-auto text-xs text-muted-foreground">{s.code}</span>
               </CommandItem>
             ))}
           </CommandGroup>
           <CommandGroup heading="Stores">
             {stores.map((s) => (
-              <CommandItem key={s.id} value={`${s.name} ${s.code}`} onSelect={() => { setSearchOpen(false); navigate({ to: "/inventory/balance" }); }}>
+              <CommandItem
+                key={s.id}
+                value={`${s.name} ${s.code}`}
+                onSelect={() => {
+                  setSearchOpen(false);
+                  navigate({ to: "/demand/stores" });
+                }}
+              >
                 {s.name} <span className="ml-auto text-xs text-muted-foreground">{s.code}</span>
               </CommandItem>
             ))}
           </CommandGroup>
-          <CommandGroup heading="Suppliers">
-            {suppliers.map((s) => (
-              <CommandItem key={s.id} value={s.name} onSelect={() => { setSearchOpen(false); navigate({ to: "/procurement/suppliers" }); }}>
-                {s.name}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-          <CommandGroup heading="Recommendations">
-            {recommendations.map((r) => (
-              <CommandItem key={r.id} value={r.title} onSelect={() => { setSearchOpen(false); navigate({ to: "/ai/recommendations" }); }}>
-                {r.title}
+          <CommandGroup heading="Demand anomalies">
+            {demandAnomalies.slice(0, 8).map((a) => (
+              <CommandItem
+                key={a.id}
+                value={`${skuById(a.skuId).name} ${storeById(a.storeId).name}`}
+                onSelect={() => {
+                  setSearchOpen(false);
+                  navigate({ to: "/demand/anomalies" });
+                }}
+              >
+                {skuById(a.skuId).name}{" "}
+                <span className="ml-auto text-xs text-muted-foreground">
+                  {storeById(a.storeId).name}
+                </span>
               </CommandItem>
             ))}
           </CommandGroup>

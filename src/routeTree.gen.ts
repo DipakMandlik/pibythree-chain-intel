@@ -17,9 +17,12 @@ import { Route as AppOverviewRouteImport } from './routes/_app.overview'
 import { Route as AppProcurementRouteImport } from './routes/_app.procurement'
 import { Route as AppAiAlertsRouteImport } from './routes/_app.ai.alerts'
 import { Route as AppAiAssistantRouteImport } from './routes/_app.ai.assistant'
+import { Route as AppAiInsightsRouteImport } from './routes/_app.ai.insights'
 import { Route as AppAiRecommendationsRouteImport } from './routes/_app.ai.recommendations'
+import { Route as AppAiScenarioRouteImport } from './routes/_app.ai.scenario'
 import { Route as AppAiSimulatorRouteImport } from './routes/_app.ai.simulator'
 import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
+import { Route as AppDemandAnomaliesRouteImport } from './routes/_app.demand.anomalies'
 import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
 import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
@@ -77,9 +80,19 @@ const AppAiAssistantRoute = AppAiAssistantRouteImport.update({
   path: '/ai/assistant',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAiInsightsRoute = AppAiInsightsRouteImport.update({
+  id: '/ai/insights',
+  path: '/ai/insights',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppAiRecommendationsRoute = AppAiRecommendationsRouteImport.update({
   id: '/ai/recommendations',
   path: '/ai/recommendations',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiScenarioRoute = AppAiScenarioRouteImport.update({
+  id: '/ai/scenario',
+  path: '/ai/scenario',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAiSimulatorRoute = AppAiSimulatorRouteImport.update({
@@ -90,6 +103,11 @@ const AppAiSimulatorRoute = AppAiSimulatorRouteImport.update({
 const AppDemandAccuracyRoute = AppDemandAccuracyRouteImport.update({
   id: '/accuracy',
   path: '/accuracy',
+  getParentRoute: () => AppDemandRoute,
+} as any)
+const AppDemandAnomaliesRoute = AppDemandAnomaliesRouteImport.update({
+  id: '/anomalies',
+  path: '/anomalies',
   getParentRoute: () => AppDemandRoute,
 } as any)
 const AppDemandDriversRoute = AppDemandDriversRouteImport.update({
@@ -190,9 +208,12 @@ export interface FileRoutesByFullPath {
   '/procurement': typeof AppProcurementRouteWithChildren
   '/ai/alerts': typeof AppAiAlertsRoute
   '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/insights': typeof AppAiInsightsRoute
   '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/scenario': typeof AppAiScenarioRoute
   '/ai/simulator': typeof AppAiSimulatorRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/anomalies': typeof AppDemandAnomaliesRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
@@ -219,9 +240,12 @@ export interface FileRoutesByTo {
   '/procurement': typeof AppProcurementRouteWithChildren
   '/ai/alerts': typeof AppAiAlertsRoute
   '/ai/assistant': typeof AppAiAssistantRoute
+  '/ai/insights': typeof AppAiInsightsRoute
   '/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/ai/scenario': typeof AppAiScenarioRoute
   '/ai/simulator': typeof AppAiSimulatorRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/demand/anomalies': typeof AppDemandAnomaliesRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
@@ -250,9 +274,12 @@ export interface FileRoutesById {
   '/_app/procurement': typeof AppProcurementRouteWithChildren
   '/_app/ai/alerts': typeof AppAiAlertsRoute
   '/_app/ai/assistant': typeof AppAiAssistantRoute
+  '/_app/ai/insights': typeof AppAiInsightsRoute
   '/_app/ai/recommendations': typeof AppAiRecommendationsRoute
+  '/_app/ai/scenario': typeof AppAiScenarioRoute
   '/_app/ai/simulator': typeof AppAiSimulatorRoute
   '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
+  '/_app/demand/anomalies': typeof AppDemandAnomaliesRoute
   '/_app/demand/drivers': typeof AppDemandDriversRoute
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/_app/demand/skus': typeof AppDemandSkusRoute
@@ -281,9 +308,12 @@ export interface FileRouteTypes {
     | '/procurement'
     | '/ai/alerts'
     | '/ai/assistant'
+    | '/ai/insights'
     | '/ai/recommendations'
+    | '/ai/scenario'
     | '/ai/simulator'
     | '/demand/accuracy'
+    | '/demand/anomalies'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
@@ -310,9 +340,12 @@ export interface FileRouteTypes {
     | '/procurement'
     | '/ai/alerts'
     | '/ai/assistant'
+    | '/ai/insights'
     | '/ai/recommendations'
+    | '/ai/scenario'
     | '/ai/simulator'
     | '/demand/accuracy'
+    | '/demand/anomalies'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
@@ -340,9 +373,12 @@ export interface FileRouteTypes {
     | '/_app/procurement'
     | '/_app/ai/alerts'
     | '/_app/ai/assistant'
+    | '/_app/ai/insights'
     | '/_app/ai/recommendations'
+    | '/_app/ai/scenario'
     | '/_app/ai/simulator'
     | '/_app/demand/accuracy'
+    | '/_app/demand/anomalies'
     | '/_app/demand/drivers'
     | '/_app/demand/forecast-explorer'
     | '/_app/demand/skus'
@@ -425,11 +461,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAiAssistantRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/ai/insights': {
+      id: '/_app/ai/insights'
+      path: '/ai/insights'
+      fullPath: '/ai/insights'
+      preLoaderRoute: typeof AppAiInsightsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/ai/recommendations': {
       id: '/_app/ai/recommendations'
       path: '/ai/recommendations'
       fullPath: '/ai/recommendations'
       preLoaderRoute: typeof AppAiRecommendationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/ai/scenario': {
+      id: '/_app/ai/scenario'
+      path: '/ai/scenario'
+      fullPath: '/ai/scenario'
+      preLoaderRoute: typeof AppAiScenarioRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/ai/simulator': {
@@ -444,6 +494,13 @@ declare module '@tanstack/react-router' {
       path: '/accuracy'
       fullPath: '/demand/accuracy'
       preLoaderRoute: typeof AppDemandAccuracyRouteImport
+      parentRoute: typeof AppDemandRoute
+    }
+    '/_app/demand/anomalies': {
+      id: '/_app/demand/anomalies'
+      path: '/anomalies'
+      fullPath: '/demand/anomalies'
+      preLoaderRoute: typeof AppDemandAnomaliesRouteImport
       parentRoute: typeof AppDemandRoute
     }
     '/_app/demand/drivers': {
@@ -570,6 +627,7 @@ declare module '@tanstack/react-router' {
 
 interface AppDemandRouteChildren {
   AppDemandAccuracyRoute: typeof AppDemandAccuracyRoute
+  AppDemandAnomaliesRoute: typeof AppDemandAnomaliesRoute
   AppDemandDriversRoute: typeof AppDemandDriversRoute
   AppDemandForecastExplorerRoute: typeof AppDemandForecastExplorerRoute
   AppDemandSkusRoute: typeof AppDemandSkusRoute
@@ -578,6 +636,7 @@ interface AppDemandRouteChildren {
 
 const AppDemandRouteChildren: AppDemandRouteChildren = {
   AppDemandAccuracyRoute: AppDemandAccuracyRoute,
+  AppDemandAnomaliesRoute: AppDemandAnomaliesRoute,
   AppDemandDriversRoute: AppDemandDriversRoute,
   AppDemandForecastExplorerRoute: AppDemandForecastExplorerRoute,
   AppDemandSkusRoute: AppDemandSkusRoute,
@@ -635,7 +694,9 @@ interface AppRouteChildren {
   AppProcurementRoute: typeof AppProcurementRouteWithChildren
   AppAiAlertsRoute: typeof AppAiAlertsRoute
   AppAiAssistantRoute: typeof AppAiAssistantRoute
+  AppAiInsightsRoute: typeof AppAiInsightsRoute
   AppAiRecommendationsRoute: typeof AppAiRecommendationsRoute
+  AppAiScenarioRoute: typeof AppAiScenarioRoute
   AppAiSimulatorRoute: typeof AppAiSimulatorRoute
   AppGovernanceAiActivityRoute: typeof AppGovernanceAiActivityRoute
   AppGovernanceAuditRoute: typeof AppGovernanceAuditRoute
@@ -649,7 +710,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppProcurementRoute: AppProcurementRouteWithChildren,
   AppAiAlertsRoute: AppAiAlertsRoute,
   AppAiAssistantRoute: AppAiAssistantRoute,
+  AppAiInsightsRoute: AppAiInsightsRoute,
   AppAiRecommendationsRoute: AppAiRecommendationsRoute,
+  AppAiScenarioRoute: AppAiScenarioRoute,
   AppAiSimulatorRoute: AppAiSimulatorRoute,
   AppGovernanceAiActivityRoute: AppGovernanceAiActivityRoute,
   AppGovernanceAuditRoute: AppGovernanceAuditRoute,

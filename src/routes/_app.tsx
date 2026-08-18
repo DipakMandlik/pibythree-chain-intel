@@ -23,11 +23,11 @@ function AppLayout() {
           <ShieldAlert className="size-6 text-warning" />
           <h1 className="text-lg font-semibold">Access restricted</h1>
           <p className="max-w-md text-sm text-muted-foreground">
-            Your role ({session?.roleLabel}) does not include access to this workspace. Contact your supply-chain
-            administrator to request additional permissions.
+            This workspace is not part of the current Predictive Demand Intelligence product phase.
+            Inventory and procurement intelligence are planned for a future phase.
           </p>
           <Button asChild className="mt-2" size="sm">
-            <Link to="/overview">Return to Executive Overview</Link>
+            <Link to="/overview">Return to Demand Overview</Link>
           </Button>
         </div>
       )}

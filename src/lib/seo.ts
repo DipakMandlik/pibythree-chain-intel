@@ -1,5 +1,5 @@
 export function pageMeta(title: string, description: string) {
-  const full = `${title} — Pibythree Supply & Demand Intelligence`;
+  const full = `${title} — Pibythree Predictive Demand Intelligence`;
   return {
     meta: [
       { title: full },

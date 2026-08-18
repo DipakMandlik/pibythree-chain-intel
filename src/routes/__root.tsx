@@ -78,17 +78,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pibythree Supply & Demand Intelligence" },
+      { title: "Pibythree Predictive Demand Intelligence" },
       {
         name: "description",
         content:
-          "Pibythree Supply & Demand Intelligence — predict demand, optimize inventory and strengthen procurement with AI decision intelligence.",
+          "Pibythree Predictive Demand Intelligence — forecast demand with intelligence, plan with confidence. A DMART demonstration environment.",
       },
       { name: "author", content: "Pibythree" },
-      { property: "og:title", content: "Pibythree Supply & Demand Intelligence" },
+      { property: "og:title", content: "Pibythree Predictive Demand Intelligence" },
       {
         property: "og:description",
-        content: "AI-powered retail supply-chain decision intelligence across demand, inventory and procurement.",
+        content: "Forecast demand with intelligence. Plan with confidence.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

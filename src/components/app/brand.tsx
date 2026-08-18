@@ -17,7 +17,7 @@ export function ProductLockup({ compact = false }: { compact?: boolean }) {
     <div className="flex flex-col gap-1.5">
       <Logo className="h-8" />
       <span className="text-[0.8125rem] font-semibold tracking-tight text-navy">
-        Supply &amp; Demand Intelligence
+        Predictive Demand Intelligence
       </span>
     </div>
   );
