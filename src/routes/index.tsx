@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
 function LoginPage() {
   const navigate = useNavigate();
   const [personaId, setPersonaId] = useState(personas[0].id);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("demo-access-2026");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const persona = personas.find((p) => p.id === personaId)!;
@@ -131,6 +131,9 @@ function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <p className="text-xs text-muted-foreground">
+                Demo password pre-filled — Sign in works as-is, no real credentials needed.
+              </p>
             </div>
             {error && <p className="text-sm text-critical">{error}</p>}
             <Button type="submit" className="w-full" disabled={pending}>
