@@ -4,7 +4,7 @@ import { ArrowRight, Building2, KeyRound, Loader2, Lock, ShieldCheck } from "luc
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Logo } from "@/components/app/brand";
+import { Logo, ProductLockup } from "@/components/app/brand";
 import { personas } from "@/data/demo";
 import { sessionStore } from "@/lib/session";
 import { cn } from "@/lib/utils";
@@ -80,12 +80,12 @@ function LoginPage() {
         </p>
       </section>
 
-      <section className="flex items-center justify-center bg-background px-6 py-12">
+      <section className="flex items-start justify-center bg-background px-6 py-10 lg:items-center lg:py-12">
         <div className="w-full max-w-md">
           <div className="lg:hidden">
-            <Logo className="h-9" />
+            <ProductLockup />
           </div>
-          <h2 className="mt-6 text-2xl font-semibold tracking-tight lg:mt-0">Sign in</h2>
+          <h2 className="mt-7 text-2xl font-semibold tracking-tight lg:mt-0">Sign in</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Forecast demand with intelligence. Plan with confidence.
           </p>
