@@ -12,12 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDemandRouteImport } from './routes/_app.demand'
+import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
 import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
 import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
 import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
 import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
+import { Route as AppInventoryStockRiskRouteImport } from './routes/_app.inventory.stock-risk'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -31,6 +33,11 @@ const AppRoute = AppRouteImport.update({
 const AppDemandRoute = AppDemandRouteImport.update({
   id: '/demand',
   path: '/demand',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInventoryRoute = AppInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
   getParentRoute: () => AppRoute,
 } as any)
 const AppOverviewRoute = AppOverviewRouteImport.update({
@@ -64,71 +71,88 @@ const AppDemandStoresRoute = AppDemandStoresRouteImport.update({
   path: '/stores',
   getParentRoute: () => AppDemandRoute,
 } as any)
+const AppInventoryStockRiskRoute = AppInventoryStockRiskRouteImport.update({
+  id: '/stock-risk',
+  path: '/stock-risk',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
+  '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
+  '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/demand': typeof AppDemandRouteWithChildren
+  '/_app/inventory': typeof AppInventoryRouteWithChildren
   '/_app/overview': typeof AppOverviewRoute
   '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
   '/_app/demand/drivers': typeof AppDemandDriversRoute
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/_app/demand/skus': typeof AppDemandSkusRoute
   '/_app/demand/stores': typeof AppDemandStoresRoute
+  '/_app/inventory/stock-risk': typeof AppInventoryStockRiskRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/demand'
+    | '/inventory'
     | '/overview'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/inventory/stock-risk'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/demand'
+    | '/inventory'
     | '/overview'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/inventory/stock-risk'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/demand'
+    | '/_app/inventory'
     | '/_app/overview'
     | '/_app/demand/accuracy'
     | '/_app/demand/drivers'
     | '/_app/demand/forecast-explorer'
     | '/_app/demand/skus'
     | '/_app/demand/stores'
+    | '/_app/inventory/stock-risk'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -157,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/demand'
       fullPath: '/demand'
       preLoaderRoute: typeof AppDemandRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/inventory': {
+      id: '/_app/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof AppInventoryRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/overview': {
@@ -201,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDemandStoresRouteImport
       parentRoute: typeof AppDemandRoute
     }
+    '/_app/inventory/stock-risk': {
+      id: '/_app/inventory/stock-risk'
+      path: '/stock-risk'
+      fullPath: '/inventory/stock-risk'
+      preLoaderRoute: typeof AppInventoryStockRiskRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
   }
 }
 
@@ -224,13 +262,27 @@ const AppDemandRouteWithChildren = AppDemandRoute._addFileChildren(
   AppDemandRouteChildren,
 )
 
+interface AppInventoryRouteChildren {
+  AppInventoryStockRiskRoute: typeof AppInventoryStockRiskRoute
+}
+
+const AppInventoryRouteChildren: AppInventoryRouteChildren = {
+  AppInventoryStockRiskRoute: AppInventoryStockRiskRoute,
+}
+
+const AppInventoryRouteWithChildren = AppInventoryRoute._addFileChildren(
+  AppInventoryRouteChildren,
+)
+
 interface AppRouteChildren {
   AppDemandRoute: typeof AppDemandRouteWithChildren
+  AppInventoryRoute: typeof AppInventoryRouteWithChildren
   AppOverviewRoute: typeof AppOverviewRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDemandRoute: AppDemandRouteWithChildren,
+  AppInventoryRoute: AppInventoryRouteWithChildren,
   AppOverviewRoute: AppOverviewRoute,
 }
 
