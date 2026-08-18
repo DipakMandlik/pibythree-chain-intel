@@ -14,6 +14,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppDemandRouteImport } from './routes/_app.demand'
 import { Route as AppInventoryRouteImport } from './routes/_app.inventory'
 import { Route as AppOverviewRouteImport } from './routes/_app.overview'
+import { Route as AppProcurementRouteImport } from './routes/_app.procurement'
 import { Route as AppDemandAccuracyRouteImport } from './routes/_app.demand.accuracy'
 import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drivers'
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
@@ -24,6 +25,11 @@ import { Route as AppInventoryExcessRouteImport } from './routes/_app.inventory.
 import { Route as AppInventoryReplenishmentRouteImport } from './routes/_app.inventory.replenishment'
 import { Route as AppInventoryStockRiskRouteImport } from './routes/_app.inventory.stock-risk'
 import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
+import { Route as AppProcurementPricingRouteImport } from './routes/_app.procurement.pricing'
+import { Route as AppProcurementPurchaseOrdersRouteImport } from './routes/_app.procurement.purchase-orders'
+import { Route as AppProcurementRfqRouteImport } from './routes/_app.procurement.rfq'
+import { Route as AppProcurementSavingsRouteImport } from './routes/_app.procurement.savings'
+import { Route as AppProcurementSuppliersRouteImport } from './routes/_app.procurement.suppliers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,6 +53,11 @@ const AppInventoryRoute = AppInventoryRouteImport.update({
 const AppOverviewRoute = AppOverviewRouteImport.update({
   id: '/overview',
   path: '/overview',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProcurementRoute = AppProcurementRouteImport.update({
+  id: '/procurement',
+  path: '/procurement',
   getParentRoute: () => AppRoute,
 } as any)
 const AppDemandAccuracyRoute = AppDemandAccuracyRouteImport.update({
@@ -101,12 +112,39 @@ const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
   path: '/transfers',
   getParentRoute: () => AppInventoryRoute,
 } as any)
+const AppProcurementPricingRoute = AppProcurementPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementPurchaseOrdersRoute =
+  AppProcurementPurchaseOrdersRouteImport.update({
+    id: '/purchase-orders',
+    path: '/purchase-orders',
+    getParentRoute: () => AppProcurementRoute,
+  } as any)
+const AppProcurementRfqRoute = AppProcurementRfqRouteImport.update({
+  id: '/rfq',
+  path: '/rfq',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementSavingsRoute = AppProcurementSavingsRouteImport.update({
+  id: '/savings',
+  path: '/savings',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
+const AppProcurementSuppliersRoute = AppProcurementSuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => AppProcurementRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
   '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/procurement': typeof AppProcurementRouteWithChildren
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
@@ -117,12 +155,18 @@ export interface FileRoutesByFullPath {
   '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/procurement/pricing': typeof AppProcurementPricingRoute
+  '/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/procurement/rfq': typeof AppProcurementRfqRoute
+  '/procurement/savings': typeof AppProcurementSavingsRoute
+  '/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demand': typeof AppDemandRouteWithChildren
   '/inventory': typeof AppInventoryRouteWithChildren
   '/overview': typeof AppOverviewRoute
+  '/procurement': typeof AppProcurementRouteWithChildren
   '/demand/accuracy': typeof AppDemandAccuracyRoute
   '/demand/drivers': typeof AppDemandDriversRoute
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
@@ -133,6 +177,11 @@ export interface FileRoutesByTo {
   '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
   '/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/procurement/pricing': typeof AppProcurementPricingRoute
+  '/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/procurement/rfq': typeof AppProcurementRfqRoute
+  '/procurement/savings': typeof AppProcurementSavingsRoute
+  '/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -141,6 +190,7 @@ export interface FileRoutesById {
   '/_app/demand': typeof AppDemandRouteWithChildren
   '/_app/inventory': typeof AppInventoryRouteWithChildren
   '/_app/overview': typeof AppOverviewRoute
+  '/_app/procurement': typeof AppProcurementRouteWithChildren
   '/_app/demand/accuracy': typeof AppDemandAccuracyRoute
   '/_app/demand/drivers': typeof AppDemandDriversRoute
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
@@ -151,6 +201,11 @@ export interface FileRoutesById {
   '/_app/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/_app/inventory/stock-risk': typeof AppInventoryStockRiskRoute
   '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
+  '/_app/procurement/pricing': typeof AppProcurementPricingRoute
+  '/_app/procurement/purchase-orders': typeof AppProcurementPurchaseOrdersRoute
+  '/_app/procurement/rfq': typeof AppProcurementRfqRoute
+  '/_app/procurement/savings': typeof AppProcurementSavingsRoute
+  '/_app/procurement/suppliers': typeof AppProcurementSuppliersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -159,6 +214,7 @@ export interface FileRouteTypes {
     | '/demand'
     | '/inventory'
     | '/overview'
+    | '/procurement'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
@@ -169,12 +225,18 @@ export interface FileRouteTypes {
     | '/inventory/replenishment'
     | '/inventory/stock-risk'
     | '/inventory/transfers'
+    | '/procurement/pricing'
+    | '/procurement/purchase-orders'
+    | '/procurement/rfq'
+    | '/procurement/savings'
+    | '/procurement/suppliers'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/demand'
     | '/inventory'
     | '/overview'
+    | '/procurement'
     | '/demand/accuracy'
     | '/demand/drivers'
     | '/demand/forecast-explorer'
@@ -185,6 +247,11 @@ export interface FileRouteTypes {
     | '/inventory/replenishment'
     | '/inventory/stock-risk'
     | '/inventory/transfers'
+    | '/procurement/pricing'
+    | '/procurement/purchase-orders'
+    | '/procurement/rfq'
+    | '/procurement/savings'
+    | '/procurement/suppliers'
   id:
     | '__root__'
     | '/'
@@ -192,6 +259,7 @@ export interface FileRouteTypes {
     | '/_app/demand'
     | '/_app/inventory'
     | '/_app/overview'
+    | '/_app/procurement'
     | '/_app/demand/accuracy'
     | '/_app/demand/drivers'
     | '/_app/demand/forecast-explorer'
@@ -202,6 +270,11 @@ export interface FileRouteTypes {
     | '/_app/inventory/replenishment'
     | '/_app/inventory/stock-risk'
     | '/_app/inventory/transfers'
+    | '/_app/procurement/pricing'
+    | '/_app/procurement/purchase-orders'
+    | '/_app/procurement/rfq'
+    | '/_app/procurement/savings'
+    | '/_app/procurement/suppliers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -244,6 +317,13 @@ declare module '@tanstack/react-router' {
       path: '/overview'
       fullPath: '/overview'
       preLoaderRoute: typeof AppOverviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/procurement': {
+      id: '/_app/procurement'
+      path: '/procurement'
+      fullPath: '/procurement'
+      preLoaderRoute: typeof AppProcurementRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/demand/accuracy': {
@@ -316,6 +396,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppInventoryTransfersRouteImport
       parentRoute: typeof AppInventoryRoute
     }
+    '/_app/procurement/pricing': {
+      id: '/_app/procurement/pricing'
+      path: '/pricing'
+      fullPath: '/procurement/pricing'
+      preLoaderRoute: typeof AppProcurementPricingRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/purchase-orders': {
+      id: '/_app/procurement/purchase-orders'
+      path: '/purchase-orders'
+      fullPath: '/procurement/purchase-orders'
+      preLoaderRoute: typeof AppProcurementPurchaseOrdersRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/rfq': {
+      id: '/_app/procurement/rfq'
+      path: '/rfq'
+      fullPath: '/procurement/rfq'
+      preLoaderRoute: typeof AppProcurementRfqRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/savings': {
+      id: '/_app/procurement/savings'
+      path: '/savings'
+      fullPath: '/procurement/savings'
+      preLoaderRoute: typeof AppProcurementSavingsRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
+    '/_app/procurement/suppliers': {
+      id: '/_app/procurement/suppliers'
+      path: '/suppliers'
+      fullPath: '/procurement/suppliers'
+      preLoaderRoute: typeof AppProcurementSuppliersRouteImport
+      parentRoute: typeof AppProcurementRoute
+    }
   }
 }
 
@@ -359,16 +474,38 @@ const AppInventoryRouteWithChildren = AppInventoryRoute._addFileChildren(
   AppInventoryRouteChildren,
 )
 
+interface AppProcurementRouteChildren {
+  AppProcurementPricingRoute: typeof AppProcurementPricingRoute
+  AppProcurementPurchaseOrdersRoute: typeof AppProcurementPurchaseOrdersRoute
+  AppProcurementRfqRoute: typeof AppProcurementRfqRoute
+  AppProcurementSavingsRoute: typeof AppProcurementSavingsRoute
+  AppProcurementSuppliersRoute: typeof AppProcurementSuppliersRoute
+}
+
+const AppProcurementRouteChildren: AppProcurementRouteChildren = {
+  AppProcurementPricingRoute: AppProcurementPricingRoute,
+  AppProcurementPurchaseOrdersRoute: AppProcurementPurchaseOrdersRoute,
+  AppProcurementRfqRoute: AppProcurementRfqRoute,
+  AppProcurementSavingsRoute: AppProcurementSavingsRoute,
+  AppProcurementSuppliersRoute: AppProcurementSuppliersRoute,
+}
+
+const AppProcurementRouteWithChildren = AppProcurementRoute._addFileChildren(
+  AppProcurementRouteChildren,
+)
+
 interface AppRouteChildren {
   AppDemandRoute: typeof AppDemandRouteWithChildren
   AppInventoryRoute: typeof AppInventoryRouteWithChildren
   AppOverviewRoute: typeof AppOverviewRoute
+  AppProcurementRoute: typeof AppProcurementRouteWithChildren
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppDemandRoute: AppDemandRouteWithChildren,
   AppInventoryRoute: AppInventoryRouteWithChildren,
   AppOverviewRoute: AppOverviewRoute,
+  AppProcurementRoute: AppProcurementRouteWithChildren,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
