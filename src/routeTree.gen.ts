@@ -19,7 +19,11 @@ import { Route as AppDemandDriversRouteImport } from './routes/_app.demand.drive
 import { Route as AppDemandForecastExplorerRouteImport } from './routes/_app.demand.forecast-explorer'
 import { Route as AppDemandSkusRouteImport } from './routes/_app.demand.skus'
 import { Route as AppDemandStoresRouteImport } from './routes/_app.demand.stores'
+import { Route as AppInventoryBalanceRouteImport } from './routes/_app.inventory.balance'
+import { Route as AppInventoryExcessRouteImport } from './routes/_app.inventory.excess'
+import { Route as AppInventoryReplenishmentRouteImport } from './routes/_app.inventory.replenishment'
 import { Route as AppInventoryStockRiskRouteImport } from './routes/_app.inventory.stock-risk'
+import { Route as AppInventoryTransfersRouteImport } from './routes/_app.inventory.transfers'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -71,9 +75,30 @@ const AppDemandStoresRoute = AppDemandStoresRouteImport.update({
   path: '/stores',
   getParentRoute: () => AppDemandRoute,
 } as any)
+const AppInventoryBalanceRoute = AppInventoryBalanceRouteImport.update({
+  id: '/balance',
+  path: '/balance',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryExcessRoute = AppInventoryExcessRouteImport.update({
+  id: '/excess',
+  path: '/excess',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryReplenishmentRoute =
+  AppInventoryReplenishmentRouteImport.update({
+    id: '/replenishment',
+    path: '/replenishment',
+    getParentRoute: () => AppInventoryRoute,
+  } as any)
 const AppInventoryStockRiskRoute = AppInventoryStockRiskRouteImport.update({
   id: '/stock-risk',
   path: '/stock-risk',
+  getParentRoute: () => AppInventoryRoute,
+} as any)
+const AppInventoryTransfersRoute = AppInventoryTransfersRouteImport.update({
+  id: '/transfers',
+  path: '/transfers',
   getParentRoute: () => AppInventoryRoute,
 } as any)
 
@@ -87,7 +112,11 @@ export interface FileRoutesByFullPath {
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/inventory/balance': typeof AppInventoryBalanceRoute
+  '/inventory/excess': typeof AppInventoryExcessRoute
+  '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,7 +128,11 @@ export interface FileRoutesByTo {
   '/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/demand/skus': typeof AppDemandSkusRoute
   '/demand/stores': typeof AppDemandStoresRoute
+  '/inventory/balance': typeof AppInventoryBalanceRoute
+  '/inventory/excess': typeof AppInventoryExcessRoute
+  '/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/inventory/transfers': typeof AppInventoryTransfersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,7 +146,11 @@ export interface FileRoutesById {
   '/_app/demand/forecast-explorer': typeof AppDemandForecastExplorerRoute
   '/_app/demand/skus': typeof AppDemandSkusRoute
   '/_app/demand/stores': typeof AppDemandStoresRoute
+  '/_app/inventory/balance': typeof AppInventoryBalanceRoute
+  '/_app/inventory/excess': typeof AppInventoryExcessRoute
+  '/_app/inventory/replenishment': typeof AppInventoryReplenishmentRoute
   '/_app/inventory/stock-risk': typeof AppInventoryStockRiskRoute
+  '/_app/inventory/transfers': typeof AppInventoryTransfersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,7 +164,11 @@ export interface FileRouteTypes {
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/inventory/balance'
+    | '/inventory/excess'
+    | '/inventory/replenishment'
     | '/inventory/stock-risk'
+    | '/inventory/transfers'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,7 +180,11 @@ export interface FileRouteTypes {
     | '/demand/forecast-explorer'
     | '/demand/skus'
     | '/demand/stores'
+    | '/inventory/balance'
+    | '/inventory/excess'
+    | '/inventory/replenishment'
     | '/inventory/stock-risk'
+    | '/inventory/transfers'
   id:
     | '__root__'
     | '/'
@@ -152,7 +197,11 @@ export interface FileRouteTypes {
     | '/_app/demand/forecast-explorer'
     | '/_app/demand/skus'
     | '/_app/demand/stores'
+    | '/_app/inventory/balance'
+    | '/_app/inventory/excess'
+    | '/_app/inventory/replenishment'
     | '/_app/inventory/stock-risk'
+    | '/_app/inventory/transfers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -232,11 +281,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDemandStoresRouteImport
       parentRoute: typeof AppDemandRoute
     }
+    '/_app/inventory/balance': {
+      id: '/_app/inventory/balance'
+      path: '/balance'
+      fullPath: '/inventory/balance'
+      preLoaderRoute: typeof AppInventoryBalanceRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/excess': {
+      id: '/_app/inventory/excess'
+      path: '/excess'
+      fullPath: '/inventory/excess'
+      preLoaderRoute: typeof AppInventoryExcessRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/replenishment': {
+      id: '/_app/inventory/replenishment'
+      path: '/replenishment'
+      fullPath: '/inventory/replenishment'
+      preLoaderRoute: typeof AppInventoryReplenishmentRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
     '/_app/inventory/stock-risk': {
       id: '/_app/inventory/stock-risk'
       path: '/stock-risk'
       fullPath: '/inventory/stock-risk'
       preLoaderRoute: typeof AppInventoryStockRiskRouteImport
+      parentRoute: typeof AppInventoryRoute
+    }
+    '/_app/inventory/transfers': {
+      id: '/_app/inventory/transfers'
+      path: '/transfers'
+      fullPath: '/inventory/transfers'
+      preLoaderRoute: typeof AppInventoryTransfersRouteImport
       parentRoute: typeof AppInventoryRoute
     }
   }
@@ -263,11 +340,19 @@ const AppDemandRouteWithChildren = AppDemandRoute._addFileChildren(
 )
 
 interface AppInventoryRouteChildren {
+  AppInventoryBalanceRoute: typeof AppInventoryBalanceRoute
+  AppInventoryExcessRoute: typeof AppInventoryExcessRoute
+  AppInventoryReplenishmentRoute: typeof AppInventoryReplenishmentRoute
   AppInventoryStockRiskRoute: typeof AppInventoryStockRiskRoute
+  AppInventoryTransfersRoute: typeof AppInventoryTransfersRoute
 }
 
 const AppInventoryRouteChildren: AppInventoryRouteChildren = {
+  AppInventoryBalanceRoute: AppInventoryBalanceRoute,
+  AppInventoryExcessRoute: AppInventoryExcessRoute,
+  AppInventoryReplenishmentRoute: AppInventoryReplenishmentRoute,
   AppInventoryStockRiskRoute: AppInventoryStockRiskRoute,
+  AppInventoryTransfersRoute: AppInventoryTransfersRoute,
 }
 
 const AppInventoryRouteWithChildren = AppInventoryRoute._addFileChildren(
